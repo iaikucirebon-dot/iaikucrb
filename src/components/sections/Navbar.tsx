@@ -87,9 +87,8 @@ export function Navbar() {
                 : "text-white hover:bg-white/10",
             )}
           >
-            {open ? <Menu className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </button>
-        </div>
+            {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+
       </div>
 
       {open ? (
