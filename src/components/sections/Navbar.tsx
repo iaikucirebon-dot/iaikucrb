@@ -122,9 +122,6 @@ export function Navbar() {
           </nav>
         </div>
       ) : null}
-      <span className="sr-only">
-        <X aria-hidden="true" />
-      </span>
     </header>
   );
 }
