@@ -88,8 +88,10 @@ export function Navbar() {
             )}
           >
             {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-
+          </button>
+        </div>
       </div>
+
 
       {open ? (
         <div className="border-border bg-background border-t xl:hidden">
