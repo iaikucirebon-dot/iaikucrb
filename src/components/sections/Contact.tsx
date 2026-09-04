@@ -10,13 +10,15 @@ export function Contact() {
 
   function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    const form = e.currentTarget;
     setSending(true);
     setTimeout(() => {
       setSending(false);
       toast.success("Terima kasih! Pesan Anda telah kami terima.");
-      e.currentTarget?.reset?.();
+      form.reset();
     }, 600);
   }
+
 
   return (
     <section id="kontak" className="bg-sand py-20 lg:py-28">
