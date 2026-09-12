@@ -59,10 +59,13 @@ export const Route = createFileRoute("/")({
       },
     ],
   }),
+  loader: () => listPublishedNews(),
   component: Index,
 });
 
 function Index() {
+  const news = Route.useLoaderData();
+
   return (
     <div className="bg-background min-h-screen">
       <Navbar />
