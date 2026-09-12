@@ -32,7 +32,7 @@ export function News({ items }: { items?: PublicNewsItem[] }) {
               <div className="group border-border flex h-full flex-col overflow-hidden rounded-2xl border bg-white transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl">
                 <div className="relative h-48 overflow-hidden">
                   <img
-                    src={n.image}
+                    src={n.image ?? fallbackImage}
                     alt={n.title}
                     loading="lazy"
                     width={1024}
