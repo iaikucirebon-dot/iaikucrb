@@ -86,9 +86,14 @@ export const listPublishedNews = createServerFn({ method: "GET" }).handler(
   },
 );
 
-async function assertAdmin(supabase: {
-  rpc: (fn: "has_role", args: { _user_id: string; _role: "admin" }) => Promise<{ data: unknown }>;
-}, userId: string) {
+type AuthedSupabase = {
+  rpc: (
+    fn: "has_role",
+    args: { _user_id: string; _role: "admin" },
+  ) => PromiseLike<{ data: unknown }>;
+};
+
+async function assertAdmin(supabase: AuthedSupabase, userId: string) {
   const { data } = await supabase.rpc("has_role", { _user_id: userId, _role: "admin" });
   if (data !== true) throw new Error("Anda tidak memiliki akses admin.");
 }
