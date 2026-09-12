@@ -81,7 +81,7 @@ function Index() {
         <Tuition />
         <Lecturers />
         <Admissions />
-        <News />
+        <News items={news} />
         <Contact />
       </main>
       <Footer />
