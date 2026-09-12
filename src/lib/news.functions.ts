@@ -145,7 +145,7 @@ export const listAllNews = createServerFn({ method: "GET" })
   });
 
 export type NewsInput = {
-  id?: string;
+  id?: string | undefined;
   slug: string;
   title: string;
   category: string;
