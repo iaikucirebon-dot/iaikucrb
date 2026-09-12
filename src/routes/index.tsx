@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 
+import { listPublishedNews } from "@/lib/news.functions";
+
 import { Navbar } from "@/components/sections/Navbar";
 import { Hero } from "@/components/sections/Hero";
 import { About } from "@/components/sections/About";
@@ -57,10 +59,13 @@ export const Route = createFileRoute("/")({
       },
     ],
   }),
+  loader: () => listPublishedNews(),
   component: Index,
 });
 
 function Index() {
+  const news = Route.useLoaderData();
+
   return (
     <div className="bg-background min-h-screen">
       <Navbar />
@@ -76,7 +81,7 @@ function Index() {
         <Tuition />
         <Lecturers />
         <Admissions />
-        <News />
+        <News items={news} />
         <Contact />
       </main>
       <Footer />
