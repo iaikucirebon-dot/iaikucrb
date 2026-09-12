@@ -1,4 +1,5 @@
 import { Facebook, Instagram, Youtube, Music2, MapPin, GraduationCap } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import { NAV, SITE } from "@/data/site";
 
 const AKADEMIK = [
@@ -90,6 +91,11 @@ export function Footer() {
               {SITE.address}
             </p>
             <p className="mt-3 text-sm text-white/70">Website: {SITE.website}</p>
+            <p className="mt-3 text-sm">
+              <Link to="/auth" className="hover:text-gold text-white/50 transition-colors">
+                Masuk Pengelola
+              </Link>
+            </p>
           </div>
         </div>
       </div>
