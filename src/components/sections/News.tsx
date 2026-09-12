@@ -2,8 +2,22 @@ import { ArrowRight, CalendarDays } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
 import { NEWS } from "@/data/site";
+import fallbackImage from "@/assets/hero-campus.jpg";
+import type { PublicNewsItem } from "@/lib/news.functions";
 
-export function News() {
+export function News({ items }: { items?: PublicNewsItem[] }) {
+  const list: PublicNewsItem[] =
+    items && items.length > 0
+      ? items
+      : NEWS.map((n) => ({
+          slug: n.slug,
+          title: n.title,
+          category: n.category,
+          excerpt: n.excerpt,
+          date: n.date,
+          image: n.image,
+        }));
+
   return (
     <section id="berita" className="py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -13,7 +27,7 @@ export function News() {
           subtitle="Kabar terkini seputar kegiatan akademik, penelitian, pengabdian, dan kemahasiswaan IAIKU Cirebon."
         />
         <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {NEWS.map((n, i) => (
+          {list.map((n, i) => (
             <Reveal as="article" key={n.slug} delay={(i % 3) * 110}>
               <div className="group border-border flex h-full flex-col overflow-hidden rounded-2xl border bg-white transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl">
                 <div className="relative h-48 overflow-hidden">
