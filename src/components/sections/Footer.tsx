@@ -1,6 +1,7 @@
-import { Facebook, Instagram, Youtube, Music2, MapPin, GraduationCap } from "lucide-react";
+import { Facebook, Instagram, Youtube, Music2, MapPin } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { NAV, SITE } from "@/data/site";
+import logoIaiku from "@/assets/logo-iaiku.png.asset.json";
 
 const AKADEMIK = [
   "Program Studi",
@@ -24,9 +25,14 @@ export function Footer() {
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           <div>
             <div className="flex items-center gap-3">
-              <span className="bg-gold text-forest-deep flex h-11 w-11 items-center justify-center rounded-xl">
-                <GraduationCap className="h-6 w-6" aria-hidden="true" />
-              </span>
+              <img
+                src={logoIaiku.url}
+                alt="Logo IAIKU Cirebon"
+                width={64}
+                height={64}
+                loading="lazy"
+                className="h-16 w-16 shrink-0 object-contain"
+              />
               <span className="font-display text-lg tracking-wide">IAIKU CIREBON</span>
             </div>
             <p className="text-gold mt-5 text-sm italic">&ldquo;{SITE.slogan}&rdquo;</p>

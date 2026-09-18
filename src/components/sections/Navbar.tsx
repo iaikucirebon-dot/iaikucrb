@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { Menu, X, GraduationCap } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { NAV, SITE } from "@/data/site";
 import { cn } from "@/lib/utils";
+import logoIaiku from "@/assets/logo-iaiku.png.asset.json";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -25,9 +26,13 @@ export function Navbar() {
     >
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
         <a href="#beranda" className="flex items-center gap-3">
-          <span className="bg-forest text-primary-foreground ring-gold/40 flex h-11 w-11 items-center justify-center rounded-xl ring-1">
-            <GraduationCap className="h-6 w-6" aria-hidden="true" />
-          </span>
+          <img
+            src={logoIaiku.url}
+            alt="Logo IAIKU Cirebon"
+            width={56}
+            height={56}
+            className="h-14 w-14 shrink-0 object-contain"
+          />
           <span className="leading-tight">
             <span
               className={cn(
