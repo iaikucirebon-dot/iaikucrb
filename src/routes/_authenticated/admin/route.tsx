@@ -81,7 +81,7 @@ function AdminLayout() {
       <header className="bg-forest sticky top-0 z-30">
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-4 py-3 sm:px-6">
           <div className="flex items-center gap-3">
-            <img src={logoIaiku} alt="Logo IAIKU Cirebon" className="h-9 w-9 object-contain" />
+            <img src={logoIaiku.url} alt="Logo IAIKU Cirebon" className="h-9 w-9 object-contain" />
             <span className="font-display text-sm text-white sm:text-base">
               Dashboard Admin IAIKU
             </span>
