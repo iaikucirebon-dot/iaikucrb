@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AuthenticatedAdminRouteRouteImport } from './routes/_authenticated/admin/route'
 import { Route as AuthenticatedAdminBeritaRouteImport } from './routes/_authenticated/admin/berita'
 import { Route as ApiPublicNewsImageSplatRouteImport } from './routes/api/public/news-image/$'
 
@@ -29,11 +30,16 @@ const AuthRoute = AuthRouteImport.update({
   path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedAdminRouteRoute = AuthenticatedAdminRouteRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedAdminBeritaRoute =
   AuthenticatedAdminBeritaRouteImport.update({
-    id: '/admin/berita',
-    path: '/admin/berita',
-    getParentRoute: () => AuthenticatedRouteRoute,
+    id: '/berita',
+    path: '/berita',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
 const ApiPublicNewsImageSplatRoute = ApiPublicNewsImageSplatRouteImport.update({
   id: '/api/public/news-image/$',
@@ -44,12 +50,14 @@ const ApiPublicNewsImageSplatRoute = ApiPublicNewsImageSplatRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/admin': typeof AuthenticatedAdminRouteRouteWithChildren
   '/admin/berita': typeof AuthenticatedAdminBeritaRoute
   '/api/public/news-image/$': typeof ApiPublicNewsImageSplatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/admin': typeof AuthenticatedAdminRouteRouteWithChildren
   '/admin/berita': typeof AuthenticatedAdminBeritaRoute
   '/api/public/news-image/$': typeof ApiPublicNewsImageSplatRoute
 }
@@ -58,19 +66,22 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
+  '/_authenticated/admin': typeof AuthenticatedAdminRouteRouteWithChildren
   '/_authenticated/admin/berita': typeof AuthenticatedAdminBeritaRoute
   '/api/public/news-image/$': typeof ApiPublicNewsImageSplatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/admin/berita' | '/api/public/news-image/$'
+  fullPaths:
+    '/' | '/auth' | '/admin' | '/admin/berita' | '/api/public/news-image/$'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/admin/berita' | '/api/public/news-image/$'
+  to: '/' | '/auth' | '/admin' | '/admin/berita' | '/api/public/news-image/$'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/auth'
+    | '/_authenticated/admin'
     | '/_authenticated/admin/berita'
     | '/api/public/news-image/$'
   fileRoutesById: FileRoutesById
@@ -105,12 +116,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/admin/berita': {
       id: '/_authenticated/admin/berita'
-      path: '/admin/berita'
+      path: '/berita'
       fullPath: '/admin/berita'
       preLoaderRoute: typeof AuthenticatedAdminBeritaRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+      parentRoute: typeof AuthenticatedAdminRouteRoute
     }
     '/api/public/news-image/$': {
       id: '/api/public/news-image/$'
@@ -122,12 +140,26 @@ declare module '@tanstack/react-router' {
   }
 }
 
-interface AuthenticatedRouteRouteChildren {
+interface AuthenticatedAdminRouteRouteChildren {
   AuthenticatedAdminBeritaRoute: typeof AuthenticatedAdminBeritaRoute
 }
 
+const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren =
+  {
+    AuthenticatedAdminBeritaRoute: AuthenticatedAdminBeritaRoute,
+  }
+
+const AuthenticatedAdminRouteRouteWithChildren =
+  AuthenticatedAdminRouteRoute._addFileChildren(
+    AuthenticatedAdminRouteRouteChildren,
+  )
+
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminRouteRoute: typeof AuthenticatedAdminRouteRouteWithChildren
+}
+
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
-  AuthenticatedAdminBeritaRoute: AuthenticatedAdminBeritaRoute,
+  AuthenticatedAdminRouteRoute: AuthenticatedAdminRouteRouteWithChildren,
 }
 
 const AuthenticatedRouteRouteWithChildren =
