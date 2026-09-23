@@ -7,7 +7,7 @@ import { BookOpen, GraduationCap, LayoutDashboard, LogOut, Newspaper, Users } fr
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { claimFirstAdmin, getMyAdminStatus } from "@/lib/news.functions";
-import logoIaiku from "@/assets/logo-iaiku.png";
+import logoIaiku from "@/assets/logo-iaiku.png.asset.json";
 
 export const Route = createFileRoute("/_authenticated/admin")({
   component: AdminLayout,
