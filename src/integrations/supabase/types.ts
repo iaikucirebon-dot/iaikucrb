@@ -14,6 +14,114 @@ export type Database = {
   }
   public: {
     Tables: {
+      admissions: {
+        Row: {
+          admin_note: string
+          created_at: string
+          email: string | null
+          full_name: string
+          id: string
+          message: string
+          origin_school: string | null
+          program_name: string | null
+          status: string
+          updated_at: string
+          whatsapp: string
+        }
+        Insert: {
+          admin_note?: string
+          created_at?: string
+          email?: string | null
+          full_name: string
+          id?: string
+          message?: string
+          origin_school?: string | null
+          program_name?: string | null
+          status?: string
+          updated_at?: string
+          whatsapp: string
+        }
+        Update: {
+          admin_note?: string
+          created_at?: string
+          email?: string | null
+          full_name?: string
+          id?: string
+          message?: string
+          origin_school?: string | null
+          program_name?: string | null
+          status?: string
+          updated_at?: string
+          whatsapp?: string
+        }
+        Relationships: []
+      }
+      faculties: {
+        Row: {
+          created_at: string
+          description: string
+          id: string
+          is_active: boolean
+          name: string
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string
+          id?: string
+          is_active?: boolean
+          name: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          id?: string
+          is_active?: boolean
+          name?: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      lecturers: {
+        Row: {
+          created_at: string
+          expertise: string
+          id: string
+          is_active: boolean
+          name: string
+          photo_url: string | null
+          position: string
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          expertise?: string
+          id?: string
+          is_active?: boolean
+          name: string
+          photo_url?: string | null
+          position?: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          expertise?: string
+          id?: string
+          is_active?: boolean
+          name?: string
+          photo_url?: string | null
+          position?: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
       news: {
         Row: {
           author_id: string | null
@@ -80,6 +188,83 @@ export type Database = {
           email?: string | null
           full_name?: string | null
           id?: string
+        }
+        Relationships: []
+      }
+      programs: {
+        Row: {
+          code: string
+          created_at: string
+          description: string
+          faculty_id: string | null
+          id: string
+          is_active: boolean
+          name: string
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          code?: string
+          created_at?: string
+          description?: string
+          faculty_id?: string | null
+          id?: string
+          is_active?: boolean
+          name: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Update: {
+          code?: string
+          created_at?: string
+          description?: string
+          faculty_id?: string | null
+          id?: string
+          is_active?: boolean
+          name?: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "programs_faculty_id_fkey"
+            columns: ["faculty_id"]
+            isOneToOne: false
+            referencedRelation: "faculties"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      tuition_items: {
+        Row: {
+          amount: number
+          created_at: string
+          id: string
+          is_active: boolean
+          label: string
+          note: string
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          amount?: number
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          label: string
+          note?: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          label?: string
+          note?: string
+          sort_order?: number
+          updated_at?: string
         }
         Relationships: []
       }
