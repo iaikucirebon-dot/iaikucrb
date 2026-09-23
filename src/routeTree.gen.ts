@@ -14,7 +14,10 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedAdminRouteRouteImport } from './routes/_authenticated/admin/route'
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin/index'
+import { Route as AuthenticatedAdminAkademikRouteImport } from './routes/_authenticated/admin/akademik'
 import { Route as AuthenticatedAdminBeritaRouteImport } from './routes/_authenticated/admin/berita'
+import { Route as AuthenticatedAdminDosenRouteImport } from './routes/_authenticated/admin/dosen'
+import { Route as AuthenticatedAdminPmbRouteImport } from './routes/_authenticated/admin/pmb'
 import { Route as ApiPublicNewsImageSplatRouteImport } from './routes/api/public/news-image/$'
 
 const IndexRoute = IndexRouteImport.update({
@@ -41,12 +44,28 @@ const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AuthenticatedAdminRouteRoute,
 } as any)
+const AuthenticatedAdminAkademikRoute =
+  AuthenticatedAdminAkademikRouteImport.update({
+    id: '/akademik',
+    path: '/akademik',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
 const AuthenticatedAdminBeritaRoute =
   AuthenticatedAdminBeritaRouteImport.update({
     id: '/berita',
     path: '/berita',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
+const AuthenticatedAdminDosenRoute = AuthenticatedAdminDosenRouteImport.update({
+  id: '/dosen',
+  path: '/dosen',
+  getParentRoute: () => AuthenticatedAdminRouteRoute,
+} as any)
+const AuthenticatedAdminPmbRoute = AuthenticatedAdminPmbRouteImport.update({
+  id: '/pmb',
+  path: '/pmb',
+  getParentRoute: () => AuthenticatedAdminRouteRoute,
+} as any)
 const ApiPublicNewsImageSplatRoute = ApiPublicNewsImageSplatRouteImport.update({
   id: '/api/public/news-image/$',
   path: '/api/public/news-image/$',
@@ -57,14 +76,20 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/admin': typeof AuthenticatedAdminRouteRouteWithChildren
+  '/admin/akademik': typeof AuthenticatedAdminAkademikRoute
   '/admin/berita': typeof AuthenticatedAdminBeritaRoute
+  '/admin/dosen': typeof AuthenticatedAdminDosenRoute
+  '/admin/pmb': typeof AuthenticatedAdminPmbRoute
   '/admin/': typeof AuthenticatedAdminIndexRoute
   '/api/public/news-image/$': typeof ApiPublicNewsImageSplatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/admin/akademik': typeof AuthenticatedAdminAkademikRoute
   '/admin/berita': typeof AuthenticatedAdminBeritaRoute
+  '/admin/dosen': typeof AuthenticatedAdminDosenRoute
+  '/admin/pmb': typeof AuthenticatedAdminPmbRoute
   '/admin': typeof AuthenticatedAdminIndexRoute
   '/api/public/news-image/$': typeof ApiPublicNewsImageSplatRoute
 }
@@ -74,7 +99,10 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRouteRouteWithChildren
+  '/_authenticated/admin/akademik': typeof AuthenticatedAdminAkademikRoute
   '/_authenticated/admin/berita': typeof AuthenticatedAdminBeritaRoute
+  '/_authenticated/admin/dosen': typeof AuthenticatedAdminDosenRoute
+  '/_authenticated/admin/pmb': typeof AuthenticatedAdminPmbRoute
   '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
   '/api/public/news-image/$': typeof ApiPublicNewsImageSplatRoute
 }
@@ -84,18 +112,32 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/admin'
+    | '/admin/akademik'
     | '/admin/berita'
+    | '/admin/dosen'
+    | '/admin/pmb'
     | '/admin/'
     | '/api/public/news-image/$'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/admin/berita' | '/admin' | '/api/public/news-image/$'
+  to:
+    | '/'
+    | '/auth'
+    | '/admin/akademik'
+    | '/admin/berita'
+    | '/admin/dosen'
+    | '/admin/pmb'
+    | '/admin'
+    | '/api/public/news-image/$'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/auth'
     | '/_authenticated/admin'
+    | '/_authenticated/admin/akademik'
     | '/_authenticated/admin/berita'
+    | '/_authenticated/admin/dosen'
+    | '/_authenticated/admin/pmb'
     | '/_authenticated/admin/'
     | '/api/public/news-image/$'
   fileRoutesById: FileRoutesById
@@ -144,11 +186,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminIndexRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
+    '/_authenticated/admin/akademik': {
+      id: '/_authenticated/admin/akademik'
+      path: '/akademik'
+      fullPath: '/admin/akademik'
+      preLoaderRoute: typeof AuthenticatedAdminAkademikRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
     '/_authenticated/admin/berita': {
       id: '/_authenticated/admin/berita'
       path: '/berita'
       fullPath: '/admin/berita'
       preLoaderRoute: typeof AuthenticatedAdminBeritaRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/dosen': {
+      id: '/_authenticated/admin/dosen'
+      path: '/dosen'
+      fullPath: '/admin/dosen'
+      preLoaderRoute: typeof AuthenticatedAdminDosenRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/pmb': {
+      id: '/_authenticated/admin/pmb'
+      path: '/pmb'
+      fullPath: '/admin/pmb'
+      preLoaderRoute: typeof AuthenticatedAdminPmbRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
     '/api/public/news-image/$': {
@@ -162,13 +225,19 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedAdminRouteRouteChildren {
+  AuthenticatedAdminAkademikRoute: typeof AuthenticatedAdminAkademikRoute
   AuthenticatedAdminBeritaRoute: typeof AuthenticatedAdminBeritaRoute
+  AuthenticatedAdminDosenRoute: typeof AuthenticatedAdminDosenRoute
+  AuthenticatedAdminPmbRoute: typeof AuthenticatedAdminPmbRoute
   AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
 }
 
 const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren =
   {
+    AuthenticatedAdminAkademikRoute: AuthenticatedAdminAkademikRoute,
     AuthenticatedAdminBeritaRoute: AuthenticatedAdminBeritaRoute,
+    AuthenticatedAdminDosenRoute: AuthenticatedAdminDosenRoute,
+    AuthenticatedAdminPmbRoute: AuthenticatedAdminPmbRoute,
     AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
   }
 
